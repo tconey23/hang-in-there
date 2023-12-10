@@ -141,7 +141,7 @@ function getRandomIndex(array) {
 };
 
 function createPoster(imageURL, title, quote) {
-  var savedPoster ={
+  var savedPoster = {
     id: Date.now(),
     imgURL: document.querySelector(".poster-img").src = imageURL,
     title: document.querySelector(".poster-title").innerText = title,
@@ -155,13 +155,13 @@ function createPoster(imageURL, title, quote) {
 
 function holdPoster(posterObject) {
   return holdPosters.push(posterObject)
-}
+};
 
 function saveThisPoster() {
   if(holdPoster.length > 0) {
     savedPosters.push(holdPosters[0])
   return holdPosters = []
-  }else{
+  } else {
     alert("You have already saved this poster")
   }
 };
@@ -180,24 +180,27 @@ function generateRandomImage() {
 };
 
 function showHiddenForm(button) {
-  switch(button.className){
+  switch(button.className) {
     case 'show-form':
-      document.querySelector(".poster-form").classList.toggle('hidden')
-      document.querySelector(".main-poster").classList.toggle('hidden')
+      document.querySelector(".poster-form").classList.toggle('hidden');
+      document.querySelector(".main-poster").classList.toggle('hidden');
     break;
     case 'show-main':
-      document.querySelector(".poster-form").classList.toggle('hidden')
-      document.querySelector(".main-poster").classList.toggle('hidden')
+      document.querySelector(".poster-form").classList.toggle('hidden');
+      document.querySelector(".main-poster").classList.toggle('hidden');
     break;
     case 'show-saved':
-      document.querySelector(".saved-posters").classList.toggle('hidden')
-      document.querySelector(".main-poster").classList.toggle('hidden')
-      if(savedPosters[0] === undefined){savedPosters.shift(0,1)}
-      renderSavedPosters()
+      document.querySelector(".saved-posters").classList.toggle('hidden');
+      document.querySelector(".main-poster").classList.toggle('hidden');
+      if (savedPosters[0] === undefined) {
+        savedPosters.shift(0,1)
+      };
+        
+      savedPosterCleanup();
     break;
     case 'back-to-main':
-      document.querySelector(".saved-posters").classList.toggle('hidden')
-      document.querySelector(".main-poster").classList.toggle('hidden')
+      document.querySelector(".saved-posters").classList.toggle('hidden');
+      document.querySelector(".main-poster").classList.toggle('hidden');
     break;
     case 'make-poster':
       document.querySelector(".poster-form").classList.toggle('hidden');
@@ -206,29 +209,34 @@ function showHiddenForm(button) {
   }
 };
 
+function savedPosterCleanup() {
+  savedPosters = savedPosters.filter(function( element ) {
+    return element !== undefined;
+  });
+  
+ renderSavedPosters();
+};
+
 function renderSavedPosters() {
   var postersGrid = document.querySelector('.saved-posters-grid');
   postersGrid.innerHTML = '';
-  savedPosters.forEach((poster, index) => {
-    var posterHTML = `<div class="mini-poster" id=${poster.id}>
-                        <img src="${poster.imgURL}" alt="Saved Poster Image">
-                        <h2>${poster.title}</h2>
-                        <h4>${poster.quote}</h4>
-                      </div>`;
+    savedPosters.forEach((poster, index) => {
+        var posterHTML = `<div class="mini-poster" id=${poster.id}>
+                            <img src="${poster.imgURL}" alt="Saved Poster Image">
+                            <h2>${poster.title}</h2>
+                            <h4>${poster.quote}</h4>
+                          </div>`;
 
-    var posterElement = document.createRange().createContextualFragment(posterHTML).firstElementChild;
+        var posterElement = document.createRange().createContextualFragment(posterHTML).firstElementChild;
+        posterElement.addEventListener('dblclick', function() {
+          var clickedIndex = savedPosters.findIndex(savedPoster => savedPoster.id === poster.id);
+          if (clickedIndex !== -1) {
+            savedPosters.splice(clickedIndex, 1);
+          }
+          renderSavedPosters();
+        });
 
-    posterElement.addEventListener('dblclick', function() {
-
-      var clickedIndex = savedPosters.findIndex(savedPoster => savedPoster.id === poster.id);
-
-      if (clickedIndex !== -1) {
-        savedPosters.splice(clickedIndex, 1);
+        postersGrid.appendChild(posterElement);
       }
-
-      renderSavedPosters();
-    });
-
-    postersGrid.appendChild(posterElement);
-  });
-}
+  );
+};
