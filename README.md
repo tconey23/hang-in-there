@@ -1,46 +1,28 @@
-# Hang In There
 
-A boilerplate repo. 
-
-## Set Up
-
-1. One teammate: fork this repository
-2. Clone down your new, forked repo
-3. cd into the repository
-4. Open it in your text editor
-5. Add all project partners and your assigned instructor as collaborators on the repository
-
-Project spec & rubric can be found [here](https://frontend.turing.edu/projects/module-1/hang-in-there-v2.html)
-
-To view your project:
-
-1. In your terminal, navigate to your project repo
-2. Run the command `open index.html`
-  
-______________________________________________________  
-# README Template  
-Before turning this project in, erase this line and everything above it and fill in the info below.  
 ______________________________________________________  
 
 # Hang in There  
 
 ### Abstract:
-[//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
+[//]: <This is a web-based application that allows the user to either view randomly generated motivational posters, or create their own. All posters can then be saved for viewing later.> 
 
 ### Installation Instructions:
-[//]: <> (What steps does a person have to take to get your app cloned down and running?)
+[//]: <The user needs to fork the repository and clone to their local machine. Open in word editor of their choice and launch website from there.> 
 
 ### Preview of App:
-[//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off.)
+[//]: <./screenshots/saved-posters-screenshot.jpg> 
 
 ### Context:
-[//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
+[//]: <We were given this project in the second week of Mod1 and we had 4 days to complete the project.> 
 
 ### Contributors:
-[//]: <> (Who worked on this application? Link to their GitHubs.)
+[//]: <Ed Chalmers and Tom Coney> 
 
 ### Learning Goals:
-[//]: <> (What were the learning goals of this project? What tech did you work with?)
+[//]: <The goal of this project was to practice our skills writing and reading JavaScript. Additionally to help develope our professional habits as they relate to working on a team. We used VS Code, GitHub, LiveShare and LiveServer.>
 
 ### Wins + Challenges:
-[//]: <> (What are 2-3 wins you have from this project? What were some challenges you faced - and how did you get over them?)
+[//]: <Challenges that turned into wins>
+    <Getting the filter() to work in order to clean up the saved posters.>
+    <Figuring out the switch() function to replace if() statements.>
+    <Getting the renderSavedPosters() function to create the HTML elements while also adding event listeners>
