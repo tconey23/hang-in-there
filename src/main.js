@@ -210,33 +210,40 @@ function showHiddenForm(button) {
 };
 
 function savedPosterCleanup() {
-  savedPosters = savedPosters.filter(function( element ) {
-    return element !== undefined;
-  });
-  
- renderSavedPosters();
+  var newSavedPosters = [];
+  for (var i = 0; i < savedPosters.length; i++) {
+      if (savedPosters[i] !== undefined) {
+          newSavedPosters.push(savedPosters[i]);
+      }
+  }
+  savedPosters = newSavedPosters;
+  renderSavedPosters();
 };
+
 
 function renderSavedPosters() {
   var postersGrid = document.querySelector('.saved-posters-grid');
   postersGrid.innerHTML = '';
-    savedPosters.forEach((poster, index) => {
-        var posterHTML = `<div class="mini-poster" id=${poster.id}>
-                            <img src="${poster.imgURL}" alt="Saved Poster Image">
-                            <h2>${poster.title}</h2>
-                            <h4>${poster.quote}</h4>
-                          </div>`;
 
-        var posterElement = document.createRange().createContextualFragment(posterHTML).firstElementChild;
-        posterElement.addEventListener('dblclick', function() {
-          var clickedIndex = savedPosters.findIndex(savedPoster => savedPoster.id === poster.id);
-          if (clickedIndex !== -1) {
-            savedPosters.splice(clickedIndex, 1);
-          }
-          renderSavedPosters();
-        });
+  for (var i=0; i < savedPosters.length; i++) {
+    var poster = savedPosters[i];
 
-        postersGrid.appendChild(posterElement);
+    var posterHTML = `<div class="mini-poster" id=${poster.id}>
+                        <img src="${poster.imgURL}" alt="Saved Poster Image">
+                        <h2>${poster.title}</h2>
+                        <h4>${poster.quote}</h4>
+                      </div>`;
+
+    var posterElement = document.createRange().createContextualFragment(posterHTML).firstElementChild;
+
+    posterElement.addEventListener('dblclick', function() {
+      var clickedIndex = savedPosters.findIndex(savedPoster => savedPoster.id === poster.id);
+      if (clickedIndex !== -1) {
+        savedPosters.splice(clickedIndex, 1);
       }
-  );
-};
+      renderSavedPosters();
+    });
+
+    postersGrid.appendChild(posterElement);
+  }
+}
